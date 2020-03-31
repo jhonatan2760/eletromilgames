@@ -1,5 +1,10 @@
 package com.jhonatansouza.eletromilgames.repository
 
+import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.mapping.Document
+import java.util.*
+
+@Document(collection = "products")
 class ProductItem {
 
     constructor(name:String , simpleDescription:String,
@@ -13,7 +18,8 @@ class ProductItem {
         this.price = price;
     }
 
-    var id = 0;
+    @Id
+    var id:Long = UUID.randomUUID().mostSignificantBits;
     var name = ""
     var simpleDescription = ""
     var quantity = 0

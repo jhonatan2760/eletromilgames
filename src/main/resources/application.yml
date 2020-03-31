@@ -1,3 +1,10 @@
 server:
   servlet:
     context-path: /api/v1
+
+spring:
+  data:
+    mongodb:
+      database: local
+      host: localhost
+      port: 27017
