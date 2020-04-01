@@ -4,6 +4,7 @@ import com.jhonatansouza.eletromilgames.repository.ProductItem
 import com.jhonatansouza.eletromilgames.repository.ProductRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.util.*
 
 @Service
 class ProductService {
@@ -19,5 +20,14 @@ class ProductService {
         this.productRepository.save(product);
         return product;
     }
+
+    fun listProducts():Iterable<ProductItem>{
+       return this.productRepository.findAll()
+    }
+
+    fun getById(id:Long): Optional<ProductItem> {
+        return this.productRepository.findById(id);
+    }
+
 
 }

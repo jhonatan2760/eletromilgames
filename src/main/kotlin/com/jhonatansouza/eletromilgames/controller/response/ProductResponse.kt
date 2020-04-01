@@ -4,7 +4,7 @@ import com.jhonatansouza.eletromilgames.repository.ProductItem
 
 class ProductResponse{
 
-    var id:Long = 0;
+    var id = 0;
     var name = ""
     var simpleDescription = ""
     var quantity = 0
