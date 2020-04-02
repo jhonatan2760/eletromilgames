@@ -19,7 +19,7 @@ class ProductItem {
     }
 
     @Id
-    var id:Long = UUID.randomUUID().mostSignificantBits;
+    var id:Long = 0;
     var name = ""
     var simpleDescription = ""
     var quantity = 0

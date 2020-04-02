@@ -2,22 +2,15 @@ package com.jhonatansouza.eletromilgames.controller.response
 
 import com.jhonatansouza.eletromilgames.repository.ProductItem
 
-class ProductResponse{
+data class ProductResponse(val id:Long,
+val name:String,
+val simpleDescription:String,
+val quantity:Int,
+val isBrandNew:Boolean,
+val price:Double){
 
-    var id:Long = 0;
-    var name = ""
-    var simpleDescription = ""
-    var quantity = 0
-    var isBrandNew = false
-    var price = 0.00
+    constructor(productItem:ProductItem) : this(id = productItem.id, name = productItem.name,
+            simpleDescription = productItem.simpleDescription,
+            quantity = productItem.quantity, price = productItem.price, isBrandNew = productItem.isBrandNew);
 
-    fun fromItem(productItem:ProductItem):ProductResponse{
-        this.id = productItem.id
-        this.name = productItem.name
-        this.simpleDescription = productItem.simpleDescription
-        this.quantity = productItem.quantity
-        this.price = productItem.price
-        this.isBrandNew = productItem.isBrandNew
-        return this;
-    }
 }

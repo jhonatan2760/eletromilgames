@@ -29,5 +29,12 @@ class ProductService {
         return this.productRepository.findById(id);
     }
 
+    fun removeById(id:Long):Boolean{
+        if(this.getById(id).isPresent){
+            this.productRepository.deleteById(id)
+            return true;
+        }
+        return false;
+    }
 
 }

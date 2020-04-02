@@ -5,6 +5,7 @@ import com.jhonatansouza.eletromilgames.controller.response.ProductResponse
 import com.jhonatansouza.eletromilgames.repository.ProductItem
 import com.jhonatansouza.eletromilgames.service.ProductService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -22,13 +23,12 @@ class ProductController {
     @PostMapping("/")
     fun createProduct(@RequestBody product:ProductRequest):ResponseEntity<ProductResponse>{
         val createdProduct = this.productService.createProduct(product.toItem());
-        return ResponseEntity.ok(ProductResponse().fromItem(createdProduct));
+        return ResponseEntity.ok(ProductResponse(createdProduct));
     }
 
     @GetMapping("/")
-    fun listProduct():ResponseEntity<Iterable<ProductItem>>{
-        return ResponseEntity.ok(this.productService.listProducts());
-    }
+    fun listProduct() =
+         ResponseEntity.ok(this.productService.listProducts())
 
     @GetMapping("/{id}")
     fun getById(@PathVariable("id") id:Long):ResponseEntity<Any>{
@@ -39,6 +39,13 @@ class ProductController {
         return ResponseEntity.notFound().build();
     }
 
+    @DeleteMapping("/{id}")
+    fun deleteById(@PathVariable("id") id:Long):ResponseEntity<Any>{
+        //validar se existia para dar 404 ou status de remoção
+        this.productService.removeById(id)
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
 
 
 }
