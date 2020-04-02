@@ -1,5 +1,6 @@
 package com.jhonatansouza.eletromilgames.service
 
+import com.jhonatansouza.eletromilgames.controller.request.ProductRequest
 import com.jhonatansouza.eletromilgames.repository.ProductItem
 import com.jhonatansouza.eletromilgames.repository.ProductRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -30,11 +31,21 @@ class ProductService {
     }
 
     fun removeById(id:Long):Boolean{
-        if(this.getById(id).isPresent){
+        return if(this.getById(id).isPresent){
             this.productRepository.deleteById(id)
-            return true;
+            true;
+        }else{
+            false;
         }
-        return false;
     }
 
+    fun updateById(id:Long, product:ProductItem):Optional<ProductItem>{
+       val prd = this.getById(id);
+        if(prd.isPresent){
+            //product.id = prd.get().id
+            return Optional.of(this.productRepository.save(product))
+        }
+
+        return Optional.empty()
+    }
 }

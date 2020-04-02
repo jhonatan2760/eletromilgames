@@ -41,10 +41,19 @@ class ProductController {
 
     @DeleteMapping("/{id}")
     fun deleteById(@PathVariable("id") id:Long):ResponseEntity<Any>{
-        //validar se existia para dar 404 ou status de remoção
-        this.productService.removeById(id)
+        return if(this.productService.removeById(id)){
+                ResponseEntity.ok().build()
+        }else{
+            ResponseEntity.notFound().build()
+        }
+    }
 
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    @PutMapping("/{id}")
+    fun updateById(@PathVariable id:Long, @RequestBody product:ProductRequest):ResponseEntity<Any> {
+
+        this.productService.updateById(id, product.toItem())
+
+        return ResponseEntity.ok().build()
     }
 
 
