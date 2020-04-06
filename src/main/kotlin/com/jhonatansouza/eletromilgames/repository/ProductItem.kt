@@ -19,7 +19,7 @@ class ProductItem {
     }
 
     @Id
-    var id:Long = 0;
+    var id:String = UUID.randomUUID().toString();
     var name = ""
     var simpleDescription = ""
     var quantity = 0

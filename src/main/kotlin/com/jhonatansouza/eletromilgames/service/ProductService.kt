@@ -26,11 +26,11 @@ class ProductService {
        return this.productRepository.findAll()
     }
 
-    fun getById(id:Long): Optional<ProductItem> {
+    fun getById(id:String): Optional<ProductItem> {
         return this.productRepository.findById(id);
     }
 
-    fun removeById(id:Long):Boolean{
+    fun removeById(id:String):Boolean{
         return if(this.getById(id).isPresent){
             this.productRepository.deleteById(id)
             true;
@@ -39,11 +39,13 @@ class ProductService {
         }
     }
 
-    fun updateById(id:Long, product:ProductItem):Optional<ProductItem>{
+    fun updateById(id:String, product:ProductItem):Optional<ProductItem>{
        val prd = this.getById(id);
-        if(prd.isPresent){
+        if(this.productRepository.existsById(id)){
             //product.id = prd.get().id
-            return Optional.of(this.productRepository.save(product))
+            product.id = id
+            val prod = this.productRepository.save(product)
+            return Optional.of(prod)
         }
 
         return Optional.empty()

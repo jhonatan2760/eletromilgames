@@ -21,9 +21,9 @@ class ProductController {
     }
 
     @PostMapping("/")
-    fun createProduct(@RequestBody product:ProductRequest):ResponseEntity<ProductResponse>{
+    fun createProduct(@RequestBody product:ProductRequest):ResponseEntity<ProductItem>{
         val createdProduct = this.productService.createProduct(product.toItem());
-        return ResponseEntity.ok(ProductResponse(createdProduct));
+        return ResponseEntity.ok(createdProduct);
     }
 
     @GetMapping("/")
@@ -31,7 +31,7 @@ class ProductController {
          ResponseEntity.ok(this.productService.listProducts())
 
     @GetMapping("/{id}")
-    fun getById(@PathVariable("id") id:Long):ResponseEntity<Any>{
+    fun getById(@PathVariable("id") id:String):ResponseEntity<Any>{
         val product = this.productService.getById(id);
         if(product.isPresent){
             return ResponseEntity.ok(product);
@@ -40,7 +40,7 @@ class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    fun deleteById(@PathVariable("id") id:Long):ResponseEntity<Any>{
+    fun deleteById(@PathVariable("id") id:String):ResponseEntity<Any>{
         return if(this.productService.removeById(id)){
                 ResponseEntity.ok().build()
         }else{
@@ -49,12 +49,24 @@ class ProductController {
     }
 
     @PutMapping("/{id}")
-    fun updateById(@PathVariable id:Long, @RequestBody product:ProductRequest):ResponseEntity<Any> {
+    fun updateById(@PathVariable id:String, @RequestBody product:ProductRequest):ResponseEntity<Any> {
 
         this.productService.updateById(id, product.toItem())
 
         return ResponseEntity.ok().build()
     }
 
+    @GetMapping("/upper")
+    fun productToUpper():ResponseEntity<String>{
+
+        val products = listOf("play station 2", "play station 4", "game boy advance",
+        "game boy color", "nintendo game cube", "nintendo switch")
+
+        mapOf(1 to "first", 2 to "second", 3 to "Jhonatan")
+                .filter { (k, v) -> v.equals("Jhonatan") }
+
+
+        return ResponseEntity.ok(products.reduce { acc, s -> "$acc, $s" })
+    }
 
 }

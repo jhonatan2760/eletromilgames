@@ -2,7 +2,7 @@ package com.jhonatansouza.eletromilgames.controller.response
 
 import com.jhonatansouza.eletromilgames.repository.ProductItem
 
-data class ProductResponse(val id:Long,
+data class ProductResponse(val id:String,
 val name:String,
 val simpleDescription:String,
 val quantity:Int,
