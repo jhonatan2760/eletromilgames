@@ -1,10 +1,10 @@
 package com.jhonatansouza.eletromilgames.service
 
-import com.jhonatansouza.eletromilgames.controller.request.ProductRequest
 import com.jhonatansouza.eletromilgames.repository.ProductItem
 import com.jhonatansouza.eletromilgames.repository.ProductRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.lang.Exception
 import java.util.*
 
 @Service
@@ -39,15 +39,15 @@ class ProductService {
         }
     }
 
-    fun updateById(id:String, product:ProductItem):Optional<ProductItem>{
-       val prd = this.getById(id);
+    fun updateById(id:String, product:ProductItem):ProductItem{
+
         if(this.productRepository.existsById(id)){
-            //product.id = prd.get().id
             product.id = id
-            val prod = this.productRepository.save(product)
-            return Optional.of(prod)
+            return this.productRepository.save(product)
+
+        }else{
+            throw object : Exception("The product doest exist"){}
         }
 
-        return Optional.empty()
     }
 }
