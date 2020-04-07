@@ -48,10 +48,10 @@ class ProductController {
         }
     }
 
-    @PutMapping("/{id}")
-    fun updateById(@PathVariable id:String, @RequestBody product:ProductRequest):ResponseEntity<Any> {
+    @PutMapping("/")
+    fun updateById(@RequestBody product:ProductRequest):ResponseEntity<Any> {
 
-        this.productService.updateById(id, product.toItem())
+        this.productService.updateById(product.toItem())
 
         return ResponseEntity.ok().build()
     }

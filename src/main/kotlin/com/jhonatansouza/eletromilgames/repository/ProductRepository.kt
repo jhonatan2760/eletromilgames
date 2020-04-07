@@ -1,6 +1,6 @@
 package com.jhonatansouza.eletromilgames.repository
 
-import org.springframework.data.repository.CrudRepository
+import org.springframework.data.mongodb.repository.MongoRepository
 
-interface ProductRepository : CrudRepository<ProductItem, String> {
+interface ProductRepository : MongoRepository<ProductItem, String> {
 }

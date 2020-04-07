@@ -7,6 +7,8 @@ data class ProductRequest (val name:String, val simpleDescription:String, val qu
 
 
     fun toItem():ProductItem{
-        return ProductItem(this.name, this.simpleDescription, this.quantity, this.brand_new, this.price);
+        return ProductItem(name = this.name, simpleDescription = this.simpleDescription, quantity = this.quantity,
+                isBrandNew = this.brand_new,
+                price = this.price);
     }
 }

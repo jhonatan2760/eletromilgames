@@ -17,37 +17,32 @@ class ProductService {
         this.productRepository = productRepository;
     }
 
-    fun createProduct(product:ProductItem):ProductItem{
-        this.productRepository.save(product);
-        return product;
-    }
+    fun createProduct(product:ProductItem):ProductItem =
+        this.productRepository.save(product)
 
-    fun listProducts():Iterable<ProductItem>{
-       return this.productRepository.findAll()
-    }
+    fun listProducts():Iterable<ProductItem> =
+            this.productRepository.findAll()
 
-    fun getById(id:String): Optional<ProductItem> {
-        return this.productRepository.findById(id);
-    }
+
+    fun getById(id:String): Optional<ProductItem> =
+        this.productRepository.findById(id);
+
 
     fun removeById(id:String):Boolean{
-        return if(this.getById(id).isPresent){
+        return if(this.productRepository.existsById(id)){
             this.productRepository.deleteById(id)
-            true;
+            this.productRepository.existsById(id);
         }else{
             false;
         }
     }
 
-    fun updateById(id:String, product:ProductItem):ProductItem{
-
-        if(this.productRepository.existsById(id)){
-            product.id = id
-            return this.productRepository.save(product)
-
+    @Throws(Exception::class)
+    fun updateById(product:ProductItem):ProductItem{
+        return if(this.productRepository.existsById(product.id.orEmpty())){
+            this.productRepository.save(product)
         }else{
             throw object : Exception("The product doest exist"){}
         }
-
     }
 }

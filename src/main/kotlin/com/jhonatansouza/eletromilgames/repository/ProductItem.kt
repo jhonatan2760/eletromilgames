@@ -2,28 +2,9 @@ package com.jhonatansouza.eletromilgames.repository
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
-import java.util.*
 
 @Document(collection = "products")
-class ProductItem {
-
-    constructor(name:String , simpleDescription:String,
-                quantity:Int,
-                isBrandNew:Boolean,
-                price:Double){
-        this.name = name;
-        this.quantity = quantity;
-        this.simpleDescription = simpleDescription;
-        this.isBrandNew = isBrandNew;
-        this.price = price;
-    }
-
-    @Id
-    var id:String = UUID.randomUUID().toString();
-    var name = ""
-    var simpleDescription = ""
-    var quantity = 0
-    var isBrandNew = false
-    var price = 0.00
-
-}
+data class ProductItem(@Id val id:String? = null, val name:String , val simpleDescription:String,
+                  val quantity:Int,
+                  val isBrandNew:Boolean,
+                  val price:Double)
