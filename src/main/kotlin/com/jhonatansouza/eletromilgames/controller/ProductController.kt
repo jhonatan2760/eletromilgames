@@ -49,12 +49,8 @@ class ProductController {
     }
 
     @PutMapping("/")
-    fun updateById(@RequestBody product:ProductRequest):ResponseEntity<Any> {
-
-        this.productService.updateById(product.toItem())
-
-        return ResponseEntity.ok().build()
-    }
+    fun updateById(@RequestBody product:ProductRequest):ResponseEntity<Any> =
+            ResponseEntity.ok(this.productService.updateById(product.toItem()))
 
     @GetMapping("/upper")
     fun productToUpper():ResponseEntity<String>{

@@ -37,12 +37,12 @@ class ProductService {
         }
     }
 
-    @Throws(Exception::class)
+    //@Throws(Exception::class)
     fun updateById(product:ProductItem):ProductItem{
-        return if(this.productRepository.existsById(product.id.orEmpty())){
+        return if(this.productRepository.existsById(product.id.orEmpty()))
             this.productRepository.save(product)
-        }else{
-            throw object : Exception("The product doest exist"){}
-        }
+        else
+            product
+
     }
 }
