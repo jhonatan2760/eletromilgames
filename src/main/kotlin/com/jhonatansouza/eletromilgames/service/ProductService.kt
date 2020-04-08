@@ -4,7 +4,6 @@ import com.jhonatansouza.eletromilgames.repository.ProductItem
 import com.jhonatansouza.eletromilgames.repository.ProductRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import java.lang.Exception
 import java.util.*
 
 @Service
@@ -31,13 +30,12 @@ class ProductService {
     fun removeById(id:String):Boolean{
         return if(this.productRepository.existsById(id)){
             this.productRepository.deleteById(id)
-            this.productRepository.existsById(id);
+            !this.productRepository.existsById(id);
         }else{
             false;
         }
     }
 
-    //@Throws(Exception::class)
     fun updateById(product:ProductItem):ProductItem{
         return if(this.productRepository.existsById(product.id.orEmpty()))
             this.productRepository.save(product)
