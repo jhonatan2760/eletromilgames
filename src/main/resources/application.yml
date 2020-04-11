@@ -6,5 +6,5 @@ spring:
   data:
     mongodb:
       database: local
-      host: localhost
+      host: 192.168.15.16
       port: 27017
